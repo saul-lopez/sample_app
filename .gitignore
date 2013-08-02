@@ -4,17 +4,31 @@
 capybara-*.html
 .rspec
 .rvmrc
+
+# Ignore bundler config.
 /.bundle
 /vendor/bundle
 /log/*
 /tmp/*
+# Ignore the default SQLite database.
 /db/*.sqlite3
+/db/*.sqlite3-journal
 /public/system/*
 /coverage/
 /spec/tmp/*
 **.orig
 rerun.txt
 pickle-email-*.html
-.project
 
+
+
+# De rails tutorial:
+database.yml
+doc/
+*.swp
+*~
+.project
+.DS_Store
 .idea
+# Archivo con token
+.secret
