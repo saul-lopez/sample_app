@@ -48,6 +48,10 @@ Spork.prefork do
     config.expect_with :rspec do |c|
       c.syntax = :expect
     end
+
+    # Las pruebas rspec fallarán si se usan rutas con nombres a menos que se cargue: url_helpers
+    # http://stackoverflow.com/questions/8435525/where-should-i-store-methods-to-make-them-available-both-to-my-application-and-t
+    config.include Rails.application.routes.url_helpers
   end
 end
 
