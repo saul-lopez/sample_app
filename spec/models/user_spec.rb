@@ -21,6 +21,11 @@ describe User do
     it { should_not be_valid }
   end
 
+  describe 'when name is too long' do
+    before { @user.name = 'a' * 51 }
+    it { should_not be_valid }
+  end
+
   #subject { @user.name }
   #it { should_not empty }
 end
