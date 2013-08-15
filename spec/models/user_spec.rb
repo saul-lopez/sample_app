@@ -58,4 +58,10 @@ describe User do
     it { should_not be_valid }
   end
 
+  describe 'email address should be converted to downcase' do
+    before { @user.update_attribute(:email, 'YO@MI.NET') }
+    subject { @user.email }
+    it { should eq ('yo@mi.net') }
+  end
+
 end
