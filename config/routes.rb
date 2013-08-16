@@ -1,5 +1,8 @@
 SampleApp::Application.routes.draw do
 
+  # Crea todas las rutas relativas a los recursos REST : Sección 7.1.2
+  resources :users
+
   root  'static_pages#home'
 
   match '/signup',  to: 'users#new',            via: 'get'
