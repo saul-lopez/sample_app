@@ -61,7 +61,9 @@ describe 'User Pages' do
         it { should have_selector('h1', user_name) }
         it { should have_selector('h1', full_title(user_name)) }
 
-        it { should have_content('Welcome') }
+        # Aparte del texto Welcome, verificar que este se encuentre en un div con la clase:
+        # <div class="alert alert-success">Welcome to the Sample App!</div>
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
 
     end
