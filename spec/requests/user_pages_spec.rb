@@ -27,14 +27,19 @@ describe 'User Pages' do
       it 'should not create a user' do
         expect { click_button submit }.not_to change(User, :count)
       end
-      it { should have_selector('li', "Name can't be blank") }
-      it { should have_selector('li', "Email can't be blank") }
-      it { should have_selector('li', "Email is invalid") }
-      it { should have_selector('li', "Password can't be blank") }
-      it { should have_selector('li', "Password is too short (minimum is 6 characters)") }
+
+      describe 'after submission' do
+        it { should have_selector('li', "Name can't be blank") }
+        it { should have_selector('li', "Email can't be blank") }
+        it { should have_selector('li', "Email is invalid") }
+        it { should have_selector('li', "Password can't be blank") }
+        it { should have_selector('li', "Password is too short (minimum is 6 characters)") }
+
+        #it { should have_content('errors') }
+      end
     end
 
-    describe 'with valid informatio' do
+    describe 'with valid information' do
       let(:user_name) { 'Example User' }
       before do
         fill_in 'Name',          with: user_name
@@ -48,6 +53,8 @@ describe 'User Pages' do
 
       it { should have_selector('h1', user_name) }
       it { should have_selector('h1', full_title(user_name)) }
+
+      #it { should have_content('Wellcome') }
     end
   end
 end
