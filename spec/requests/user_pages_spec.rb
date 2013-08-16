@@ -35,8 +35,9 @@ describe 'User Pages' do
     end
 
     describe 'with valid informatio' do
+      let(:user_name) { 'Example User' }
       before do
-        fill_in 'Name',          with: 'Example User'
+        fill_in 'Name',          with: user_name
         fill_in 'Email',         with: 'user@example.com'
         fill_in 'Password',      with: 'foobar'
         fill_in 'Confirmation',  with: 'foobar'
@@ -44,6 +45,9 @@ describe 'User Pages' do
       it 'should create a user' do
         expect {click_button submit }.to change(User, :count).by(1)
       end
+
+      it { should have_selector('h1', user_name) }
+      it { should have_selector('h1', full_title(user_name)) }
     end
   end
 end
