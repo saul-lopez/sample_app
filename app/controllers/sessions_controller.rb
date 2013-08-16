@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if (user && user.authenticate(params[:session][:password]))
-      # Iniciar sesión y redirigir a página de perfil
+      sign_in user
+      redirect_to user
     else
       # Crear mensaje de error y redirigir nuevamente al formulario de autenticación.
       flash.now[:error] = 'Invalid user name or password'
