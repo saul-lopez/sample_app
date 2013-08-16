@@ -23,19 +23,23 @@ describe 'User Pages' do
     before { visit signup_path }
     let(:submit) { 'Create my account' }
 
-    describe 'wiith invalid information' do
-      it 'should not create a user' do
+    describe "with invalid information" do
+      it "should not create a user" do
         expect { click_button submit }.not_to change(User, :count)
       end
 
-      describe 'after submission' do
+
+      describe "after submission" do
+        before { click_button submit }
+
         it { should have_selector('li', "Name can't be blank") }
         it { should have_selector('li', "Email can't be blank") }
-        it { should have_selector('li', "Email is invalid") }
+        it { should have_selector('li', 'Email is invalid') }
         it { should have_selector('li', "Password can't be blank") }
-        it { should have_selector('li', "Password is too short (minimum is 6 characters)") }
+        it { should have_selector('li', 'Password is too short (minimum is 6 characters)') }
 
-        #it { should have_content('errors') }
+        it { should have_title("Sign Up") }
+        it { should have_content('error') }
       end
     end
 
@@ -51,10 +55,15 @@ describe 'User Pages' do
         expect {click_button submit }.to change(User, :count).by(1)
       end
 
-      it { should have_selector('h1', user_name) }
-      it { should have_selector('h1', full_title(user_name)) }
+      describe 'it should redirect to user profile page' do
+        before { click_button submit }
 
-      #it { should have_content('Wellcome') }
+        it { should have_selector('h1', user_name) }
+        it { should have_selector('h1', full_title(user_name)) }
+
+        it { should have_content('Welcome') }
+      end
+
     end
   end
 end
