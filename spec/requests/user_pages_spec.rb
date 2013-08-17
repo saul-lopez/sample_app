@@ -73,7 +73,14 @@ describe 'User Pages' do
         it { should have_link('Sign out',    href: signout_path) }
         it { should have_title(user.name) }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+
+        describe 'followed by signout' do
+          before { click_link 'Sign out' }
+          it { should have_link('Sign in', href: signin_path) }
+        end
       end
+
+
 
     end
   end
